@@ -3,10 +3,11 @@ import request from 'superagent';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import Mui from '../data/mui';
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import style from '../../css/style.css';
 const url = {
   req: 'http://seiji.kpi-net.com/api/',
-  sample: 'http://seiji.kpi-net.com/api/?type=3&count=1&format=json'
+  sample: 'http://seiji.kpi-net.com/api/?type=1&count=10&format=json'
 }
 
 export default class Main extends Component {
@@ -15,6 +16,9 @@ export default class Main extends Component {
     this.ajax()
     this.ajax = this.ajax.bind(this);
     this.check = this.check.bind(this);
+    this.state ={
+      body: []
+    }
   }
 
   ajax() {
@@ -39,6 +43,20 @@ export default class Main extends Component {
   }
 
   render() {
+    const list = this.state.body.map(body => {
+      return (<Card>
+        <CardHeader
+          title={body.name}
+          subtitle={body.yomi}
+          actAsExpander={true}
+          showExpandableButton={true}
+          />
+        <CardText expandable={true}>
+          <div></div>
+        </CardText>
+      </Card>
+    )
+    })
     return (
       <MuiThemeProvider muiTheme={Mui}>
         <main>
@@ -46,6 +64,7 @@ export default class Main extends Component {
             title="Title"
             />
           <div onClick={this.check}>state check</div>
+          {list}
         </main>
       </MuiThemeProvider>
     )
