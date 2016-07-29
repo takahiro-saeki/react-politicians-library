@@ -58,7 +58,7 @@ export default class Main extends Component {
             <Divider />
             <section style={{display: 'flex', padding: '1rem 0'}}>
               <div style={{width: '30%'}}>地域</div>
-              <div style={{width: '70%'}}>{body.area}</div>
+              <div style={{width: '70%', borderLeft: '1px solid #CCC', padding: '0 0 0 .5rem'}}>{body.area}</div>
             </section>
             <Divider />
             <section style={{display: 'flex', padding: '1rem 0'}}>
@@ -68,9 +68,8 @@ export default class Main extends Component {
             <Divider />
             <section style={{display: 'flex', padding: '1rem 0'}}>
               <div style={{width: '30%'}}>初当選</div>
-              <div style={{width: '70%'}}>{body.hatsu_tousen}</div>
+              <div style={{width: '70%', borderLeft: '1px solid #CCC', padding: '0 0 0 .5rem'}}>{body.hatsu_tousen}</div>
             </section>
-            <Divider />
           </CardText>
         </Card>
       )
