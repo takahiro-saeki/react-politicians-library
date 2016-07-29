@@ -6,7 +6,7 @@ import Mui from '../data/mui';
 import style from '../../css/style.css';
 const url = {
   req: 'http://seiji.kpi-net.com/api/',
-  sample: 'http://seiji.kpi-net.com/api/?type=1&count=3&format=json'
+  sample: 'http://seiji.kpi-net.com/api/?type=3&count=1&format=json'
 }
 
 export default class Main extends Component {
@@ -25,7 +25,11 @@ export default class Main extends Component {
         console.log(err)
       } else {
         console.log(res)
-        this.setState({body: res.text})
+        const data = res.text.replace(/\r?\n/g,"").trim();
+        const politicians = (new Function("return " + data))();
+        this.setState({
+          body: politicians
+        })
       }
     })
   }
