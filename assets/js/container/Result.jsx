@@ -12,11 +12,12 @@ import url from '../data/url';
 export default class Main extends Component {
   constructor(props) {
     super(props);
-    this.ajax()
-    this.ajax = this.ajax.bind(this);
     this.state ={
       body: []
     }
+    this.ajax()
+    this.ajax = this.ajax.bind(this);
+    this.typeCheck = this.typeCheck.bind(this);
   }
 
   ajax() {
@@ -29,11 +30,33 @@ export default class Main extends Component {
         console.log(res)
         const data = res.text.replace(/\r?\n/g,"").trim();
         const politicians = (new Function("return " + data))();
+        console.log(politicians)
         this.setState({
           body: politicians
         })
       }
     })
+  }
+
+  typeCheck() {
+    switch(this.props.params.type) {
+      case '1':
+      return '衆議院議員'
+      case '2':
+      return '参議院議員'
+      case '3':
+      return '知事'
+      case '4':
+      return '市長'
+      case '5':
+      return '区長'
+      case '6':
+      return '町長'
+      case '7':
+      return '村長'
+      default:
+      return '不正な値です'
+    }
   }
 
   render() {
@@ -84,7 +107,7 @@ export default class Main extends Component {
     return (
       <MuiThemeProvider muiTheme={Mui}>
         <main>
-          <Header page={`検索結果：`} leftIcon={true} />
+          <Header page={`検索結果：${this.typeCheck()}`} leftIcon={true} />
           {list}
         </main>
       </MuiThemeProvider>
