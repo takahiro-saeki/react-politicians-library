@@ -85,21 +85,28 @@ export default class Main extends Component {
               <div className={style.resultHeading}>政党</div>
               <div className={style.resultContent}>{body.seitou}</div>
             </section>
-            <Divider />
-            <section className={style.resultContainer}>
-              <div className={style.resultHeading}>誕生日</div>
-              <div className={style.resultContent}>{body.birth}</div>
-            </section>
-            <Divider />
-            <section className={style.resultContainer}>
-              <div className={style.resultHeading}>当選回数</div>
-              <div className={style.resultContent}>{body.tousen_kaisu}</div>
-            </section>
-            <Divider />
-            <section className={style.resultContainer}>
-              <div className={style.resultHeading}>{body.linkname}</div>
-              <div className={style.resultContent}>{body.link}</div>
-            </section>
+            {(() => {
+              if(this.props.params.type < 3) {
+                return (
+              <div>
+                <Divider />
+                <section className={style.resultContainer}>
+                  <div className={style.resultHeading}>誕生日</div>
+                  <div className={style.resultContent}>{body.birth}</div>
+                </section>
+                <Divider />
+                <section className={style.resultContainer}>
+                  <div className={style.resultHeading}>当選回数</div>
+                  <div className={style.resultContent}>{body.tousen_kaisu}</div>
+                </section>
+                <Divider />
+                <section className={style.resultContainer}>
+                  <div className={style.resultHeading}>{body.linkname}</div>
+                  <div className={style.resultContent}>{body.link}</div>
+                </section>
+              </div>)
+              }
+            })()}
           </CardText>
         </Card>
       )
