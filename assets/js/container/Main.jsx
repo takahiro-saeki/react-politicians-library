@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import request from 'superagent';
 import uuid from 'node-uuid';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
+import Header from '../component/Header';
 import Divider from 'material-ui/Divider';
 import Mui from '../data/mui';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
@@ -92,9 +92,7 @@ export default class Main extends Component {
     return (
       <MuiThemeProvider muiTheme={Mui}>
         <main>
-          <AppBar
-            title="Title"
-            />
+          <Header page="議員検索" leftIcon={false} />
           <div onClick={this.check} style={{padding: '1rem'}}>state check</div>
           {list}
         </main>
