@@ -86,25 +86,26 @@ export default class Main extends Component {
               <div className={style.resultContent}>{body.seitou}</div>
             </section>
             {(() => {
-              if(this.props.params.type < 3) {
+              if(this.props.params.type < 4) {
                 return (
-              <div>
-                <Divider />
-                <section className={style.resultContainer}>
-                  <div className={style.resultHeading}>誕生日</div>
-                  <div className={style.resultContent}>{body.birth}</div>
-                </section>
-                <Divider />
-                <section className={style.resultContainer}>
-                  <div className={style.resultHeading}>当選回数</div>
-                  <div className={style.resultContent}>{body.tousen_kaisu}</div>
-                </section>
-                <Divider />
-                <section className={style.resultContainer}>
-                  <div className={style.resultHeading}>{body.linkname}</div>
-                  <div className={style.resultContent}>{body.link}</div>
-                </section>
-              </div>)
+                  <div>
+                    <Divider />
+                    <section className={style.resultContainer}>
+                      <div className={style.resultHeading}>誕生日</div>
+                      <div className={style.resultContent}>{body.birth}</div>
+                    </section>
+                    <Divider />
+                    <section className={style.resultContainer}>
+                      <div className={style.resultHeading}>当選回数</div>
+                      <div className={style.resultContent}>{body.tousen_kaisu}</div>
+                    </section>
+                    <Divider />
+                    <section className={style.resultContainer}>
+                      <div className={style.resultHeading}>{body.linkname}</div>
+                      <div className={style.resultContent}><a href={body.link}>{body.link}</a></div>
+                    </section>
+                  </div>
+                )
               }
             })()}
           </CardText>

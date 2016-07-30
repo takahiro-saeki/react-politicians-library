@@ -19,14 +19,14 @@ export default class Main extends Component {
     super(props);
     this.state ={
       body: [],
-      count: 1,
+      count: 10,
       type: 1
     }
     this.ajax()
     this.ajax = this.ajax.bind(this);
     this.typeChange = this.typeChange.bind(this);
     this.location = this.location.bind(this);
-    this.check = this.check.bind(this);
+    this.countChange = this.countChange.bind(this);
   }
 
   ajax() {
@@ -46,12 +46,12 @@ export default class Main extends Component {
     })
   }
 
-  check() {
-    console.log(this.props.params)
-  }
-
   typeChange(event, index, value) {
     this.setState({type: value})
+  }
+
+  countChange(event, index, value) {
+    this.setState({count: value})
   }
 
   location() {
@@ -62,35 +62,42 @@ export default class Main extends Component {
     const selectItems = listItems.map(item => {
       return <MenuItem value={item.id} key={uuid.v4()} primaryText={item.type} />
     })
+    const box = []
+    for(let i = 1; i < 10; i++) {
+      box.push(<MenuItem value={Number(`${i}0`)} key={uuid.v4()} primaryText={`${i}0件の表示`} />)
+    }
 
     return (
       <MuiThemeProvider muiTheme={Mui}>
         <main>
           <Header page="議員検索" leftIcon={false} />
           <section style={{padding: '1rem'}}>
-          <SelectField
-            value={this.state.type}
-            onChange={this.typeChange}
-            maxHeight={200}
-            fullWidth={true}>
-            {selectItems}
-          </SelectField>
-          <RaisedButton
-            label="検索する"
-            primary={true}
-            fullWidth={true}
-            style={{margin: '1rem auto'}}
-            onClick={this.location}
-          />
-          <RaisedButton
-            label="stateチェック"
-            primary={true}
-            fullWidth={true}
-            style={{margin: '1rem auto'}}
-            onClick={this.check}
-          />
-
-        </section>
+            <SelectField
+              floatingLabelText="種類"
+              floatingLabelFixed={true}
+              value={this.state.type}
+              onChange={this.typeChange}
+              maxHeight={200}
+              fullWidth={true}>
+              {selectItems}
+            </SelectField>
+            <SelectField
+              floatingLabelText="表示件数"
+              floatingLabelFixed={true}
+              value={this.state.count}
+              onChange={this.countChange}
+              maxHeight={200}
+              fullWidth={true}>
+              {box}
+            </SelectField>
+            <RaisedButton
+              label="検索する"
+              primary={true}
+              fullWidth={true}
+              style={{margin: '1rem auto'}}
+              onClick={this.location}
+              />
+          </section>
         </main>
       </MuiThemeProvider>
     )
