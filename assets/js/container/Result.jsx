@@ -2,22 +2,18 @@ import React, {Component} from 'react';
 import request from 'superagent';
 import uuid from 'node-uuid';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
+import Header from '../component/Header';
 import Divider from 'material-ui/Divider';
 import Mui from '../data/mui';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import style from '../../css/style.css';
-const url = {
-  req: 'http://seiji.kpi-net.com/api/',
-  sample: 'http://seiji.kpi-net.com/api/?type=1&count=10&format=json'
-}
+import url from '../data/url';
 
 export default class Main extends Component {
   constructor(props) {
     super(props);
     this.ajax()
     this.ajax = this.ajax.bind(this);
-    this.check = this.check.bind(this);
     this.state ={
       body: []
     }
@@ -38,10 +34,6 @@ export default class Main extends Component {
         })
       }
     })
-  }
-
-  check() {
-    console.log(this.state)
   }
 
   render() {
@@ -92,10 +84,7 @@ export default class Main extends Component {
     return (
       <MuiThemeProvider muiTheme={Mui}>
         <main>
-          <AppBar
-            title="Title"
-            />
-          <div onClick={this.check} style={{padding: '1rem'}}>state check</div>
+          <Header page={`検索結果：`} leftIcon={true} />
           {list}
         </main>
       </MuiThemeProvider>

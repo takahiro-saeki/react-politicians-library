@@ -7,19 +7,21 @@ import Divider from 'material-ui/Divider';
 import Mui from '../data/mui';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import style from '../../css/style.css';
-const url = {
-  req: 'http://seiji.kpi-net.com/api/',
-  sample: 'http://seiji.kpi-net.com/api/?type=1&count=10&format=json'
-}
+import url from '../data/url';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+import listItems from '../data/listItems';
 
 export default class Main extends Component {
   constructor(props) {
     super(props);
     this.ajax()
     this.ajax = this.ajax.bind(this);
-    this.check = this.check.bind(this);
+    this.typeChange = this.typeChange.bind(this);
     this.state ={
-      body: []
+      body: [],
+      count: 1,
+      type: 1
     }
   }
 
@@ -40,61 +42,24 @@ export default class Main extends Component {
     })
   }
 
-  check() {
-    console.log(this.state)
+  typeChange(event, index, value) {
+    this.setState(() => this.state.type = value)
   }
 
   render() {
-    const list = this.state.body.map(body => {
-      return (
-        <Card key={uuid.v4()}>
-          <CardHeader
-            title={body.name}
-            subtitle={body.yomi}
-            actAsExpander={true}
-            showExpandableButton={true}
-            />
-          <CardText expandable={true}>
-            <Divider />
-            <section className={style.resultContainer}>
-              <div className={style.resultHeading}>地域</div>
-              <div className={style.resultContent}>{body.area}</div>
-            </section>
-            <Divider />
-            <section className={style.resultContainer}>
-              <div className={style.resultHeading}>カテゴリー</div>
-              <div className={style.resultContent}>{body.category}</div>
-            </section>
-            <Divider />
-            <section className={style.resultContainer}>
-              <div className={style.resultHeading}>政党</div>
-              <div className={style.resultContent}>{body.seitou}</div>
-            </section>
-            <Divider />
-            <section className={style.resultContainer}>
-              <div className={style.resultHeading}>誕生日</div>
-              <div className={style.resultContent}>{body.birth}</div>
-            </section>
-            <Divider />
-            <section className={style.resultContainer}>
-              <div className={style.resultHeading}>当選回数</div>
-              <div className={style.resultContent}>{body.tousen_kaisu}</div>
-            </section>
-            <Divider />
-            <section className={style.resultContainer}>
-              <div className={style.resultHeading}>{body.linkname}</div>
-              <div className={style.resultContent}>{body.link}</div>
-            </section>
-          </CardText>
-        </Card>
-      )
+    const selectItems = listItems.map(item => {
+      return <MenuItem value={item.id} key={uuid.v4()} primaryText={item.type} />
     })
+
     return (
       <MuiThemeProvider muiTheme={Mui}>
         <main>
           <Header page="議員検索" leftIcon={false} />
-          <div onClick={this.check} style={{padding: '1rem'}}>state check</div>
-          {list}
+          <section style={{padding: '1rem'}}>
+          <SelectField value={this.state.type} onChange={this.typeChange} maxHeight={200} fullWidth={true}>
+            {selectItems}
+          </SelectField>
+        </section>
         </main>
       </MuiThemeProvider>
     )
