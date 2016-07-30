@@ -7,6 +7,7 @@
 - add loader
 - change UI color
 - add error logic
+- firebase deploy
 
 ##USAGE
 ```
