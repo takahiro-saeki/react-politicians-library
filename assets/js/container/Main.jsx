@@ -8,7 +8,6 @@ import Divider from 'material-ui/Divider';
 import Mui from '../data/mui';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import style from '../../css/style.css';
-import url from '../data/url';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import listItems from '../data/listItems';
@@ -22,28 +21,15 @@ export default class Main extends Component {
       count: 10,
       type: 1
     }
-    this.ajax()
-    this.ajax = this.ajax.bind(this);
     this.typeChange = this.typeChange.bind(this);
     this.location = this.location.bind(this);
     this.countChange = this.countChange.bind(this);
+    this.countDefault = this.countDefault.bind(this);
+    this.countDefault();
   }
 
-  ajax() {
-    request
-    .get(url.sample)
-    .end((err, res) => {
-      if(err) {
-        console.log(err)
-      } else {
-        console.log(res)
-        const data = res.text.replace(/\r?\n/g,"").trim();
-        const politicians = (new Function("return " + data))();
-        this.setState({
-          body: politicians
-        })
-      }
-    })
+  countDefault() {
+    localStorage.setItem('count', this.state.count);
   }
 
   typeChange(event, index, value) {
@@ -53,7 +39,6 @@ export default class Main extends Component {
   countChange(event, index, value) {
     this.setState({count: value})
     localStorage.setItem('count', value);
-    console.log(value)
   }
 
   location() {
