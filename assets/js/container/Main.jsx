@@ -9,7 +9,7 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import style from '../../css/style.css';
 const url = {
   req: 'http://seiji.kpi-net.com/api/',
-  sample: 'http://seiji.kpi-net.com/api/?type=1&count=1&format=json'
+  sample: 'http://seiji.kpi-net.com/api/?type=1&count=10&format=json'
 }
 
 export default class Main extends Component {
@@ -56,19 +56,34 @@ export default class Main extends Component {
             />
           <CardText expandable={true}>
             <Divider />
-            <section style={{display: 'flex', padding: '1rem 0'}}>
-              <div style={{width: '30%'}}>地域</div>
-              <div style={{width: '70%', borderLeft: '1px solid #CCC', padding: '0 0 0 .5rem'}}>{body.area}</div>
+            <section className={style.resultContainer}>
+              <div className={style.resultHeading}>地域</div>
+              <div className={style.resultContent}>{body.area}</div>
             </section>
             <Divider />
-            <section style={{display: 'flex', padding: '1rem 0'}}>
-              <div style={{width: '30%'}}>カテゴリー</div>
-              <div style={{width: '70%', borderLeft: '1px solid #CCC', padding: '0 0 0 .5rem'}}>{body.category}</div>
+            <section className={style.resultContainer}>
+              <div className={style.resultHeading}>カテゴリー</div>
+              <div className={style.resultContent}>{body.category}</div>
             </section>
             <Divider />
-            <section style={{display: 'flex', padding: '1rem 0'}}>
-              <div style={{width: '30%'}}>初当選</div>
-              <div style={{width: '70%', borderLeft: '1px solid #CCC', padding: '0 0 0 .5rem'}}>{body.hatsu_tousen}</div>
+            <section className={style.resultContainer}>
+              <div className={style.resultHeading}>政党</div>
+              <div className={style.resultContent}>{body.seitou}</div>
+            </section>
+            <Divider />
+            <section className={style.resultContainer}>
+              <div className={style.resultHeading}>誕生日</div>
+              <div className={style.resultContent}>{body.birth}</div>
+            </section>
+            <Divider />
+            <section className={style.resultContainer}>
+              <div className={style.resultHeading}>当選回数</div>
+              <div className={style.resultContent}>{body.tousen_kaisu}</div>
+            </section>
+            <Divider />
+            <section className={style.resultContainer}>
+              <div className={style.resultHeading}>{body.linkname}</div>
+              <div className={style.resultContent}>{body.link}</div>
             </section>
           </CardText>
         </Card>

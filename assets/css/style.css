@@ -1,1 +1,16 @@
 @import 'common/base';
+
+.resultContainer {
+  display: flex;
+  padding: 1rem 0;
+}
+
+.resultHeading {
+  width: 30%;
+}
+
+.resultContent {
+  width: 70%;
+  border-left: 1px solid #CCC;
+  padding: 0 0 0 .5rem;
+}
