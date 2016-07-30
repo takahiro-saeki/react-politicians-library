@@ -17,15 +17,16 @@ import RaisedButton from 'material-ui/RaisedButton';
 export default class Main extends Component {
   constructor(props) {
     super(props);
-    this.ajax()
-    this.ajax = this.ajax.bind(this);
-    this.typeChange = this.typeChange.bind(this);
-    this.location = this.location.bind(this);
     this.state ={
       body: [],
       count: 1,
       type: 1
     }
+    this.ajax()
+    this.ajax = this.ajax.bind(this);
+    this.typeChange = this.typeChange.bind(this);
+    this.location = this.location.bind(this);
+    this.check = this.check.bind(this);
   }
 
   ajax() {
@@ -45,8 +46,12 @@ export default class Main extends Component {
     })
   }
 
+  check() {
+    console.log(this.props.params)
+  }
+
   typeChange(event, index, value) {
-    this.setState(() => this.state.type = value)
+    this.setState({type: value})
   }
 
   location() {
@@ -63,10 +68,28 @@ export default class Main extends Component {
         <main>
           <Header page="議員検索" leftIcon={false} />
           <section style={{padding: '1rem'}}>
-          <SelectField value={this.state.type} onChange={this.typeChange} maxHeight={200} fullWidth={true}>
+          <SelectField
+            value={this.state.type}
+            onChange={this.typeChange}
+            maxHeight={200}
+            fullWidth={true}>
             {selectItems}
           </SelectField>
-          <RaisedButton label="検索する" primary={true} fullWidth={true} style={{margin: '1rem auto'}} onClick={this.location}/>
+          <RaisedButton
+            label="検索する"
+            primary={true}
+            fullWidth={true}
+            style={{margin: '1rem auto'}}
+            onClick={this.location}
+          />
+          <RaisedButton
+            label="stateチェック"
+            primary={true}
+            fullWidth={true}
+            style={{margin: '1rem auto'}}
+            onClick={this.check}
+          />
+
         </section>
         </main>
       </MuiThemeProvider>

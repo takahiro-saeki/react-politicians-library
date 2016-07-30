@@ -21,7 +21,7 @@ export default class Main extends Component {
 
   ajax() {
     request
-    .get(url.sample)
+    .get(`${url.req}?type=${this.props.params.type}&count=10&format=json`)
     .end((err, res) => {
       if(err) {
         console.log(err)
