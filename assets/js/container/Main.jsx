@@ -52,6 +52,8 @@ export default class Main extends Component {
 
   countChange(event, index, value) {
     this.setState({count: value})
+    localStorage.setItem('count', value);
+    console.log(value)
   }
 
   location() {
