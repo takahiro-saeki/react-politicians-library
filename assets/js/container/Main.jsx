@@ -12,6 +12,11 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import listItems from '../data/listItems';
 import RaisedButton from 'material-ui/RaisedButton';
+//後程削除
+const url = {
+  req: 'http://seiji.kpi-net.com/api/',
+  sample: 'http://seiji.kpi-net.com/api/?type=1&count=10&format=json'
+}
 
 export default class Main extends Component {
   constructor(props) {
@@ -26,6 +31,43 @@ export default class Main extends Component {
     this.countChange = this.countChange.bind(this);
     this.countDefault = this.countDefault.bind(this);
     this.countDefault();
+    this.check()
+  }
+
+  //政党、地域での絞り込みの為の確認
+  check() {
+    request
+    .get(`${url.req}?type=1&count=900&format=json`)
+    .end((err, res) => {
+      if(err) {
+        console.log(err)
+      } else {
+        console.log(res)
+        const data = res.text.replace(/\r?\n/g,"").trim();
+        const politicians = (new Function("return " + data))();
+        console.log(politicians)
+        const jimin = [];
+        const koumei = [];
+        const dp = [];
+        const other = []
+        politicians.map(poli => {
+          switch(poli.seitou) {
+            case '自民党':
+              return jimin.push(poli)
+            case '公明党':
+              return koumei.push(poli)
+            case '民主党':
+              return dp.push(poli)
+            default:
+              return other.push(poli)
+          }
+        })
+        console.log(jimin)
+        console.log(koumei)
+        console.log(dp)
+        console.log(other)
+      }
+    })
   }
 
   countDefault() {
@@ -51,7 +93,7 @@ export default class Main extends Component {
     })
     const box = []
     for(let i = 1; i < 10; i++) {
-      box.push(<MenuItem value={Number(`${i}0`)} key={uuid.v4()} primaryText={`${i}0件の表示`} />)
+      box.push(<MenuItem value={Number(`${i}00`)} key={uuid.v4()} primaryText={`${i}00件の表示`} />)
     }
 
     return (
