@@ -8,12 +8,14 @@ import Mui from '../data/mui';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import style from '../../css/style.css';
 import url from '../data/url';
+import Subheader from 'material-ui/Subheader';
 
 export default class Main extends Component {
   constructor(props) {
     super(props);
     this.state ={
-      body: []
+      body: [],
+      items: null
     }
     this.ajax()
     this.ajax = this.ajax.bind(this);
@@ -41,7 +43,8 @@ export default class Main extends Component {
           }
         })
         this.setState({
-          body: box
+          body: box,
+          items: box.length
         })
       }
     })
@@ -125,6 +128,7 @@ export default class Main extends Component {
       <MuiThemeProvider muiTheme={Mui}>
         <main>
           <Header page={`検索結果：${this.typeCheck()}`} leftIcon={true} />
+          <Subheader>検索結果：{localStorage.getItem('party')}/ 件数：{this.state.items}</Subheader>
           {list}
         </main>
       </MuiThemeProvider>
