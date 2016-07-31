@@ -13,10 +13,11 @@ import MenuItem from 'material-ui/MenuItem';
 import listItems from '../data/listItems';
 import RaisedButton from 'material-ui/RaisedButton';
 import party from '../data/party';
+import partyName from '../data/partyName';
 //後程削除
 const url = {
   req: 'http://seiji.kpi-net.com/api/',
-  sample: 'http://seiji.kpi-net.com/api/?type=1&count=10&format=json'
+  sample: 'http://seiji.kpi-net.com/api/?type=4&count=10&format=json'
 }
 
 export default class Main extends Component {
@@ -24,12 +25,12 @@ export default class Main extends Component {
     super(props);
     this.state ={
       body: [],
-      count: 10,
+      party: null,
       type: 1
     }
     this.typeChange = this.typeChange.bind(this);
     this.location = this.location.bind(this);
-    this.countChange = this.countChange.bind(this);
+    this.partyChange = this.countChange.bind(this);
     this.countDefault = this.countDefault.bind(this);
     this.countDefault();
     this.check()
@@ -38,7 +39,7 @@ export default class Main extends Component {
   //政党、地域での絞り込みの為の確認
   check() {
     request
-    .get(`${url.req}?type=1&count=900&format=json`)
+    .get(`${url.req}?type=4&count=900&format=json`)
     .end((err, res) => {
       if(err) {
         console.log(err)
@@ -46,7 +47,7 @@ export default class Main extends Component {
         console.log(res)
         const data = res.text.replace(/\r?\n/g,"").trim();
         const politicians = (new Function("return " + data))();
-        console.log(politicians)
+        //console.log(politicians)
         const other = [];
         politicians.map(poli => {
           switch(poli.seitou) {
@@ -105,9 +106,9 @@ export default class Main extends Component {
     this.setState({type: value})
   }
 
-  countChange(event, index, value) {
-    this.setState({count: value})
-    localStorage.setItem('count', value);
+  partyChange(event, index, value) {
+    this.setState({party: value})
+    localStorage.setItem('party', value);
   }
 
   location() {
@@ -122,6 +123,10 @@ export default class Main extends Component {
     for(let i = 1; i < 10; i++) {
       box.push(<MenuItem value={Number(`${i}00`)} key={uuid.v4()} primaryText={`${i}00件の表示`} />)
     }
+
+    const partyList = partyName.map(partyName => {
+      return <MenuItem value={partyName.name} key={uuid.v4()} primaryText={partyName.name} />
+    })
 
     return (
       <MuiThemeProvider muiTheme={Mui}>
@@ -140,11 +145,11 @@ export default class Main extends Component {
             <SelectField
               floatingLabelText="表示件数"
               floatingLabelFixed={true}
-              value={this.state.count}
-              onChange={this.countChange}
+              value={this.state.party}
+              onChange={this.partyChange}
               maxHeight={200}
               fullWidth={true}>
-              {box}
+              {partyList}
             </SelectField>
             <RaisedButton
               label="検索する"
