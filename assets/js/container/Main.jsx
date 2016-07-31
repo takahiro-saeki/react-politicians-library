@@ -25,12 +25,12 @@ export default class Main extends Component {
     super(props);
     this.state ={
       body: [],
-      party: null,
+      party: '自民党',
       type: 1
     }
     this.typeChange = this.typeChange.bind(this);
     this.location = this.location.bind(this);
-    this.partyChange = this.countChange.bind(this);
+    this.partyChange = this.partyChange.bind(this);
     this.countDefault = this.countDefault.bind(this);
     this.countDefault();
     this.check()
@@ -39,7 +39,7 @@ export default class Main extends Component {
   //政党、地域での絞り込みの為の確認
   check() {
     request
-    .get(`${url.req}?type=4&count=900&format=json`)
+    .get(`${url.req}?type=1&count=900&format=json`)
     .end((err, res) => {
       if(err) {
         console.log(err)

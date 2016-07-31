@@ -22,7 +22,7 @@ export default class Main extends Component {
 
   ajax() {
     request
-    .get(`${url.req}?type=${this.props.params.type}&count=${localStorage.getItem('count')}&format=json`)
+    .get(`${url.req}?type=${this.props.params.type}&count=1000&format=json`)
     .end((err, res) => {
       if(err) {
         console.log(err)
@@ -31,8 +31,17 @@ export default class Main extends Component {
         const data = res.text.replace(/\r?\n/g,"").trim();
         const politicians = (new Function("return " + data))();
         console.log(politicians)
+        const selectParty = localStorage.getItem('party');
+        const box = [];
+        politicians.map(poli => {
+          if(selectParty === poli.seitou) {
+            box.push(poli);
+          } else {
+            return false;
+          }
+        })
         this.setState({
-          body: politicians
+          body: box
         })
       }
     })
