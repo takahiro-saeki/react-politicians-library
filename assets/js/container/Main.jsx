@@ -33,73 +33,10 @@ export default class Main extends Component {
     this.partyChange = this.partyChange.bind(this);
     this.countDefault = this.countDefault.bind(this);
     this.countDefault();
-    this.check()
-  }
-
-  //政党、地域での絞り込みの為の確認
-  check() {
-    request
-    .get(`${url.req}?type=1&count=900&format=json`)
-    .end((err, res) => {
-      if(err) {
-        console.log(err)
-      } else {
-        console.log(res)
-        const data = res.text.replace(/\r?\n/g,"").trim();
-        const politicians = (new Function("return " + data))();
-        //console.log(politicians)
-        const other = [];
-        politicians.map(poli => {
-          switch(poli.seitou) {
-            case party.jimin.name:
-              return party.jimin.data.push(poli)
-            case party.koumei.name:
-              return party.koumei.data.push(poli)
-            case party.dp.name:
-              return party.dp.data.push(poli)
-            case party.seikatsu.name:
-              return party.seikatsu.data.push(poli)
-            case party.independents.name:
-              return party.independents.data.push(poli)
-            case party.ishin.name:
-              return party.ishin.data.push(poli)
-            case party.everybody.name:
-              return party.everybody.data.push(poli)
-            case party.UnityParty.name:
-              return party.UnityParty.data.push(poli)
-            case party.green.name:
-              return party.green.data.push(poli)
-            case party.syamin.name:
-              return party.syamin.data.push(poli)
-            case party.kyousan.name:
-              return party.kyousan.data.push(poli)
-            case party.shintou.name:
-              return party.shintou.data.push(poli)
-            default:
-              return other.push(poli)
-          }
-        })
-        console.log(party.jimin.data)
-        console.log(party.koumei.data)
-        console.log(party.dp.data)
-        console.log(party.seikatsu.data)
-        console.log(party.independents.data)
-        console.log(party.ishin.data)
-        console.log(party.everybody.data)
-        console.log(party.UnityParty.data)
-        console.log(party.green.data)
-        console.log(party.syamin.data)
-        console.log(party.kyousan.data)
-        console.log(party.shintou.data)
-        if(other.length !== 0) {
-          console.log(other)
-        }
-      }
-    })
   }
 
   countDefault() {
-    localStorage.setItem('count', this.state.count);
+    localStorage.setItem('party', this.state.party);
   }
 
   typeChange(event, index, value) {

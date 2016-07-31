@@ -9,17 +9,28 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import style from '../../css/style.css';
 import url from '../data/url';
 import Subheader from 'material-ui/Subheader';
+import CircularProgress from 'material-ui/CircularProgress';
 
 export default class Main extends Component {
   constructor(props) {
     super(props);
     this.state ={
       body: [],
-      items: null
+      items: null,
+      loader: false
     }
     this.ajax()
     this.ajax = this.ajax.bind(this);
     this.typeCheck = this.typeCheck.bind(this);
+    this.loaderShow = this.loaderShow.bind(this);
+  }
+
+  componentWillMount() {
+    this.loaderShow()
+  }
+
+  loaderShow() {
+    this.setState({loader: true})
   }
 
   ajax() {
@@ -124,9 +135,17 @@ export default class Main extends Component {
         </Card>
       )
     })
+
+    const Loader = () => {
+      if (this.state.loader === true) {
+        return <CircularProgress />
+      }
+    }
+
     return (
       <MuiThemeProvider muiTheme={Mui}>
         <main>
+          {Loader()}
           <Header page={`検索結果：${this.typeCheck()}`} leftIcon={true} />
           <Subheader>検索結果：{localStorage.getItem('party')}/ 件数：{this.state.items}</Subheader>
           {list}
