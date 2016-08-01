@@ -12,13 +12,7 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import listItems from '../data/listItems';
 import RaisedButton from 'material-ui/RaisedButton';
-import party from '../data/party';
 import partyName from '../data/partyName';
-//後程削除
-const url = {
-  req: 'http://seiji.kpi-net.com/api/',
-  sample: 'http://seiji.kpi-net.com/api/?type=4&count=10&format=json'
-}
 
 export default class Main extends Component {
   constructor(props) {
@@ -56,10 +50,6 @@ export default class Main extends Component {
     const selectItems = listItems.map(item => {
       return <MenuItem value={item.id} key={uuid.v4()} primaryText={item.type} />
     })
-    const box = []
-    for(let i = 1; i < 10; i++) {
-      box.push(<MenuItem value={Number(`${i}00`)} key={uuid.v4()} primaryText={`${i}00件の表示`} />)
-    }
 
     const partyList = partyName.map(partyName => {
       return <MenuItem value={partyName.name} key={uuid.v4()} primaryText={partyName.name} />

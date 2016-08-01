@@ -41,10 +41,8 @@ export default class Main extends Component {
       if(err) {
         console.log(err)
       } else {
-        console.log(res)
         const data = res.text.replace(/\r?\n/g,"").trim();
         const politicians = (new Function("return " + data))();
-        console.log(politicians)
         const selectParty = localStorage.getItem('party');
         const box = [];
         politicians.map(poli => {
