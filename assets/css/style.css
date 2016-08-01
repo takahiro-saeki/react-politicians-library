@@ -15,16 +15,6 @@
   padding: 0 0 0 .5rem;
 }
 
-.loader {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  z-index: 100;
-}
-
 .loaderBg {
   background: #f7f7f7;
   width: 100%;
