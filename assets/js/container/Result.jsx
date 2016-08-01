@@ -10,6 +10,7 @@ import style from '../../css/style.css';
 import url from '../data/url';
 import Subheader from 'material-ui/Subheader';
 import CircularProgress from 'material-ui/CircularProgress';
+import inlineStyle from '../data/inlineStyle';
 
 export default class Main extends Component {
   constructor(props) {
@@ -55,7 +56,8 @@ export default class Main extends Component {
         })
         this.setState({
           body: box,
-          items: box.length
+          items: box.length,
+          loader: false
         })
       }
     })
@@ -138,17 +140,20 @@ export default class Main extends Component {
 
     const Loader = () => {
       if (this.state.loader === true) {
-        return <CircularProgress />
+        return <CircularProgress style={inlineStyle.loader} size={1.5}/>
       }
     }
 
     return (
       <MuiThemeProvider muiTheme={Mui}>
         <main>
-          {Loader()}
           <Header page={`検索結果：${this.typeCheck()}`} leftIcon={true} />
+          <section>
+            <div className={this.state.loader ? style.loaderBg: ''}></div>
+            {Loader()}
           <Subheader>検索結果：{localStorage.getItem('party')}/ 件数：{this.state.items}</Subheader>
           {list}
+          </section>
         </main>
       </MuiThemeProvider>
     )
