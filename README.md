@@ -1,7 +1,5 @@
 #politicians library for japanese with React.js
 
-<img src="https://github.com/takahiro-saeki/img-bank/blob/master/react-politicians-library/1.png"/>
-
 ##purpose
 - change color material-ui
 - separate to small component
