@@ -5,12 +5,6 @@ this app image is [here](https://github.com/takahiro-saeki/react-politicians-lib
 - change color material-ui
 - separate to small component
 
-##task
-- add loader
-- change UI color
-- add error logic
-- firebase deploy
-
 ##USAGE
 ```
 $ npm i
