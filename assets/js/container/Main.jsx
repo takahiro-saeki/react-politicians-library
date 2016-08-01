@@ -71,7 +71,7 @@ export default class Main extends Component {
               {selectItems}
             </SelectField>
             <SelectField
-              floatingLabelText="表示件数"
+              floatingLabelText="政党名"
               floatingLabelFixed={true}
               value={this.state.party}
               onChange={this.partyChange}
