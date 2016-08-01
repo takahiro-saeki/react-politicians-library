@@ -15,6 +15,7 @@ export default class Header extends Component {
   render() {
     return (
       <AppBar
+        style={{background: "#673AB7"}}
         title={this.props.page}
         titleStyle={{textAlign: "center"}}
         iconClassNameRight="muidocs-icon-navigation-expand-more"

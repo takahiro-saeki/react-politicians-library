@@ -140,7 +140,7 @@ export default class Main extends Component {
 
     const Loader = () => {
       if (this.state.loader === true) {
-        return <CircularProgress style={inlineStyle.loader} size={1.5}/>
+        return <CircularProgress style={inlineStyle.loader} size={1.5} color="#E91E63"/>
       }
     }
 

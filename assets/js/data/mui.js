@@ -1,4 +1,4 @@
-import {cyan500} from 'material-ui/styles/colors';
+import {cyan500, deepPurple500} from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 export const Mui = getMuiTheme({
@@ -6,6 +6,7 @@ export const Mui = getMuiTheme({
     textColor: cyan500,
   },
   appBar: {
-    height: 50
-  }
+    height: 50,
+    backgroundColor: deepPurple500
+  },
 });

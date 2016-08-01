@@ -90,9 +90,10 @@ export default class Main extends Component {
             </SelectField>
             <RaisedButton
               label="検索する"
-              primary={true}
               fullWidth={true}
               style={{margin: '1rem auto'}}
+              backgroundColor="#E91E63"
+              labelColor="#FFF"
               onClick={this.location}
               />
           </section>
