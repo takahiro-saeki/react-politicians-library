@@ -3,16 +3,17 @@ import {browserHistory} from 'react-router';
 import request from 'superagent';
 import uuid from 'node-uuid';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Header from '../component/Header';
-import Divider from 'material-ui/Divider';
-import Mui from '../data/mui';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import style from '../../css/style.css';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import listItems from '../data/listItems';
+import Divider from 'material-ui/Divider';
 import RaisedButton from 'material-ui/RaisedButton';
+import Header from '../component/Header';
+import Mui from '../data/mui';
+import style from '../../css/style.css';
+import listItems from '../data/listItems';
 import partyName from '../data/partyName';
+import inlineStyle from '../data/inlineStyle';
 
 export default class Main extends Component {
   constructor(props) {
@@ -81,9 +82,9 @@ export default class Main extends Component {
             <RaisedButton
               label="検索する"
               fullWidth={true}
-              style={{margin: '1rem auto'}}
-              backgroundColor="#E91E63"
-              labelColor="#FFF"
+              style={inlineStyle.btn}
+              backgroundColor={inlineStyle.btnBg}
+              labelColor={inlineStyle.btnColor}
               onClick={this.location}
               />
           </section>

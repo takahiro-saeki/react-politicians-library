@@ -7,7 +7,21 @@ const inlineStyle = {
     right: 0,
     margin: 'auto',
     zIndex: 100
-  }
+  },
+  header: {
+    background: "#673AB7"
+  },
+  headerTitle: {
+    textAlign: "center"
+  },
+  wrap: {
+    padding: '1rem'
+  },
+  btn: {
+    margin: '1rem auto'
+  },
+  btnBg: "#E91E63",
+  btnColor: "#FFF"
 }
 
 export default inlineStyle

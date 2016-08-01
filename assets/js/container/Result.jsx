@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import request from 'superagent';
 import uuid from 'node-uuid';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Header from '../component/Header';
 import Divider from 'material-ui/Divider';
-import Mui from '../data/mui';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import style from '../../css/style.css';
-import url from '../data/url';
 import Subheader from 'material-ui/Subheader';
 import CircularProgress from 'material-ui/CircularProgress';
+import Header from '../component/Header';
+import Mui from '../data/mui';
+import style from '../../css/style.css';
+import url from '../data/url';
 import inlineStyle from '../data/inlineStyle';
 
 export default class Main extends Component {
@@ -20,10 +20,10 @@ export default class Main extends Component {
       items: null,
       loader: false
     }
-    this.ajax()
     this.ajax = this.ajax.bind(this);
     this.typeCheck = this.typeCheck.bind(this);
     this.loaderShow = this.loaderShow.bind(this);
+    this.ajax()
   }
 
   componentWillMount() {
